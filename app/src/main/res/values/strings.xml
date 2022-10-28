@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Aviator</string>
+    <string name="play">Play</string>
+    <string name="settings">Settings</string>
+    <string name="info">Info</string>
+    <string name="positiveBtn">OK</string>
+    <string name="startBtn">Start</string>
+    <string name="betTv">Bet</string>
+    <string name="takeTv">Rate</string>
+    <string name="resultNegative">You lost</string>
+    <string name="resultPositive">You win</string>
+    <string name="tryAgainBtn"> Try again</string>
+    <string name="backToMenu">Back to Menu</string>
+    <string name="minBet">Minimum bet is 100</string>
+    <string name="music">Sounds</string>
+    <string name="message">Launch the Jetguy to win your bet and claim a reward. Before the start you can choose a desirable bet and a rate. </string>
+    <string name="claim">Claim</string>
+</resources>
