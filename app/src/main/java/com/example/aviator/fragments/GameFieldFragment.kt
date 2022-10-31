@@ -4,8 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
-import android.os.Bundle
-import android.os.SystemClock
+import android.os.*
 import android.util.DisplayMetrics
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -24,9 +23,10 @@ class GameFieldFragment : Fragment(R.layout.fragment_game_field) {
 
     companion object {
         const val TAG = "Game"
+        private const val VIBRATOR = "Vibrator"
         private const val MUSIC = "Music"
-        fun newInstance(musicStatus: Boolean) = GameFieldFragment().apply {
-            arguments = bundleOf(MUSIC to musicStatus)
+        fun newInstance(musicStatus: Boolean, vibratorStatus: Boolean) = GameFieldFragment().apply {
+            arguments = bundleOf(MUSIC to musicStatus, VIBRATOR to vibratorStatus)
         }
     }
 
@@ -191,7 +191,7 @@ class GameFieldFragment : Fragment(R.layout.fragment_game_field) {
 
     private fun startCountDown() {
         scope.launch {
-            var randomTime = (1000..10000).random().toFloat()
+            var randomTime = getRandom() * 1000
             while (randomTime > 0) {
                 if (isClaimed) {
                     break
@@ -202,6 +202,15 @@ class GameFieldFragment : Fragment(R.layout.fragment_game_field) {
             if (!isClaimed) {
                 blowUpTheRocket()
             }
+        }
+    }
+   private fun getRandom(): Int {
+        return when ((1..10).random()) {
+            in 1..5 -> (1..2).random()
+            in 6..7 -> 3
+            8 -> (4..5).random()
+            9 -> (6..7).random()
+            else  -> (8..10).random()
         }
     }
 
@@ -222,6 +231,7 @@ class GameFieldFragment : Fragment(R.layout.fragment_game_field) {
         rocket.background = null
         rocket.setImageResource(R.drawable.explosion_min)
         playExplosionSound()
+        startVibration()
     }
 
     @SuppressLint("SetTextI18n")
@@ -275,5 +285,24 @@ class GameFieldFragment : Fragment(R.layout.fragment_game_field) {
 
     private fun checkMusicStatus(): Boolean {
         return requireArguments().getBoolean(MUSIC)
+    }
+
+    private fun startVibration() {
+        if(requireArguments().getBoolean(VIBRATOR)) {
+            val vibrator = requireContext().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            val milliseconds = 1000L
+            if (vibrator.hasVibrator()) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    vibrator.vibrate(
+                        VibrationEffect.createOneShot(
+                            milliseconds,
+                            VibrationEffect.DEFAULT_AMPLITUDE
+                        )
+                    )
+                } else {
+                    vibrator.vibrate(milliseconds)
+                }
+            }
+        }
     }
 }

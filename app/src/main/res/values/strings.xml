@@ -15,4 +15,9 @@
     <string name="music">Sounds</string>
     <string name="message">Launch the Jetguy to win your bet and claim a reward. Before the start you can choose a desirable bet and a rate. </string>
     <string name="claim">Claim</string>
+    <string name="soundsON">Sounds ON</string>
+    <string name="soundsOFF">Sounds OFF</string>
+    <string name="vibrationON">Vibration ON</string>
+    <string name="vibrationOFF">Vibration OFF</string>
+    <string name="vibration">Vibration</string>
 </resources>

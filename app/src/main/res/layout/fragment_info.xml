@@ -5,6 +5,15 @@
     android:layout_height="match_parent"
     android:background="@drawable/frame2">
 
+    <ImageView
+        android:id="@+id/rocketImg"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="208dp"
+        android:layout_marginTop="124dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/infoTv"
         android:layout_width="wrap_content"
@@ -22,9 +31,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="@string/message"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="16sp"
+        android:padding="8dp"
+        android:background="@drawable/settins_buttons_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/infoTv" />
+        app:layout_constraintTop_toBottomOf="@id/infoTv"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
