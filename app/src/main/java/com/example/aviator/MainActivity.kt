@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), Navigator {
 
     private var musicStatus = true
     private var vibratorStatus = true
+    private val toast by lazy { Toast(applicationContext) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,11 +28,17 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), Navigator {
     }
 
     override fun launchGameFieldFragment() {
-        openFragment(GameFieldFragment.newInstance(musicStatus, vibratorStatus), GameFieldFragment.TAG)
+        openFragment(
+            GameFieldFragment.newInstance(musicStatus, vibratorStatus),
+            GameFieldFragment.TAG
+        )
     }
 
     override fun launchSettingsFragment() {
-        openFragment(SettingsFragment.newInstance(musicStatus, vibratorStatus), SettingsFragment.TAG)
+        openFragment(
+            SettingsFragment.newInstance(musicStatus, vibratorStatus),
+            SettingsFragment.TAG
+        )
         SettingsFragment.getMusicState {
             musicStatus = it
         }
@@ -45,7 +52,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), Navigator {
     }
 
     override fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        toast.apply {
+            cancel()
+            duration = Toast.LENGTH_SHORT
+            setText(message)
+            toast
+        }.show()
     }
 
     override fun back() {
